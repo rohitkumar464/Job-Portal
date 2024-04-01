@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Post Job{% endblock %}
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+      <link href="{{ asset('css/editpostjob.css') }}" rel="stylesheet"/>
+{% endblock %}
+{% block body %}
+        <nav class="navbar navbar-light">
+            <span class="navbar a"> <img src="{{ asset('image/plane.png') }}"> JOBSTAKE</span>
+            <form class="form-inline">
+                <a href="profile.php"><button class="btn btn-outline-success my-2 my-sm-0" type="button">BACK</button></a>
+            </form>
+        </nav>
+        <div class="container">
+            <h3>EDIT POST</h3>
+            <form class="form" action="{{ path('update_postjob', {id: users.id }) }}" method="post" enctype="multipart/form-data">
+                <label for="fullname">Name</label>
+                <input type="text" id="fullname" name="fullname" value="{{ users.name }}" required>
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" value="{{ users.email }}" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" required>
+
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location" value="{{ users.location }}" Required >
+                <label for="jobtitle">Job Title</label>
+                <textarea id="jobtitle" name="jobtitle" value="" Required>{{ users.jobtitle }}</textarea>
+                <!-- <label for="myfile" class="img">UPLOAD A THUMBNAIL IMAGE</label>
+                <input id="myfile" name="myfile" style="display:none" type="file" Required> -->
+                <label for="myfile">Image:</label>
+                <input type="file" id="myfile" name="myfile" value="{{ users.image }}">
+                <input type="submit" name="submit" class="submit1">
+            </form>
+        </div>
+{% endblock %}

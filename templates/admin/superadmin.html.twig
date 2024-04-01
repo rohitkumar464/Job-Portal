@@ -1,0 +1,138 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SuperAdmin{% endblock %}
+
+ {% block stylesheets %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+          <link href="{{ asset('css/superadmin.css') }}" rel="stylesheet"/>
+
+        {% endblock %}
+
+
+
+{% block body %}
+
+
+
+
+    <header>
+            <div class="container-fluid">
+                <nav class="navbar">
+                    <span class="a"> <img src="{{ asset('image/plane.png') }}" class="img"/> All Users</span>
+                     <a href="{{ path('admin_logout') }}" class="float-right btn btn-danger btn-sm">LOGOUT</a>
+                </nav>
+            </div> 
+    </header>
+        <main>
+            <!-- Display the status message -->
+     
+    {# <?php    $statusMsg=$_GET['status'];
+    if(!empty($statusMsg)){ ?>
+    <div class="alert alert-success">
+        <?php echo $statusMsg; ?>
+    </div>
+     <?php } ?>  #}
+   
+            <div class="container">
+                
+                    <div class="table-responsive">
+                        <table class="bordered table">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="select_all" value=""/></th>        
+                                    <th>Image</th>
+                                    <th>User Name</th>
+                                    <th>Full Name</th>
+                                    <th>Email</th>
+                                    <th>Gender</th>
+                                    <th>Phone No.</th>
+                                    <th>No. of Posts</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tr> 
+                            <form name="bulk_action_form" action="{{ path('delete_users') }}" method="post" onSubmit="return delete_confirm();">
+                                <input type="submit" class="btn btn-danger" name="bulk_delete_submit" value="Delete"/>
+                                {% for user in appointments %}
+                                <td><input type="checkbox" name="checked_id[]" class="checkbox" value="{{ user.id }}"/></td>        
+                                <td> <img src="{{  asset('user_image/' ~ user.image)}}"  style="color:blue;width:50px;height:50px;"/></td>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.fullname }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.gender }}</td>
+                                <td>{{ user.contact }}</td>
+                                 <td><a href = "{{ path('all_postjobs', {id: user.id }) }}" class="{{ user.id }}">{{ user.id }}</a></td>
+                                 <td>
+                                 <input type="checkbox" id="{{ user.id }}" class="togglecheckbox" name="activelink" value="activelink"  onclick="disable({{ user.id }})"/>
+                                <label for="{{ user.id }}" class="switch"></label>
+                                </td>
+                            </form>
+                            {# <form  action="{{ path('show_userpost', {id: user.id }) }}" method="post">
+                                {# <td><input type="submit" value={{ user.id }} id="submitpost" /></td> #}
+                                {# <a href = "{{ path('all_postjob', {id: user.id }) }}" id="link">{{ user.id }}</a> #}
+                                {# <td><a href='showuserpost.php?id=<?php echo $rows['user_id'];?>'id="<?php echo $rows['user_name']; ?>"></a></td> #}
+                                <!-- Default switch -->
+                                {# <p id="demo">hii</p>
+                                <a href="{{ path('all_postjob')}}" id="links">hii</a>
+                                <button type="button" onclick="disable({{ user.id }})">Click Me!</button> #}
+                                {# <td>
+                                <input type="checkbox" id="{{ user.id }}" class="togglecheckbox" name="activelink" value="activelink" />
+                                <label for="{{ user.id }}" class="switch"></label>
+                                </td>
+                            </form>   #}
+                            </tr>
+                              {% endfor %}
+                        </table>
+                    </div>
+                  
+            </div> 
+            <div class="center">
+            <div class="pagination">
+                {# <?php
+                //display the link of the pages in URL  
+                for($page = 1; $page<= $number_of_page; $page++) {  
+                        echo '<a href = "superadmin.php?page=' . $page . '"class="active">' . '   '  .$page . ' </a>';  
+                    }
+                ?> #}
+                 <div class="navigation">
+                {{ knp_pagination_render(appointments) }}
+            </div>
+
+            </div>
+        </div>
+  
+        
+        </main> 
+        
+        
+        <div class="footer">
+            <p>footer</p>
+            <p>&copy;2021 Nadine Coelho | All Rights Reserved</p>
+        </div> 
+   <script src="{{ asset('js/superadmin.js') }}"></script>
+    {# //     <script type="text/javascript"> #}
+    {# // $(function () {
+    //     $("#btnEnableDisable").click(function () {
+    //         if ($(this).val() == "Disable") {
+    //             $(this).val("Enable");
+    //             $("#ravishsingh").each(function () {
+    //                 $(this).attr("rel", $(this).attr("href"));
+    //                 $(this).attr("href", "javascript:;");
+    //             });
+    //         } else {
+    //             $(this).val("Disable");
+    //             $("#ravishsingh").each(function () {
+    //                 $(this).attr("href", $(this).attr("rel"));
+    //                 $(this).removeAttr("rel");
+    //             });
+    //         }
+    //     });
+    // });
+    // </script> #}
+
+{% endblock %}

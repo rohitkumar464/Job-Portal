@@ -1,0 +1,143 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin Signup{% endblock %}
+{% block stylesheets %}
+            {#{{ encore_entry_link_tags('app') }}#}
+            <link href="{{ asset('css/adminsignup.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block body %}
+    <header>
+        <div class="container-fluid">
+            <nav class="navbar">
+                <span class="a"><img src="{{ asset('image/plane.png') }}" alt="Symfony!"/ class="img">  Admin Registration</span>
+                <!-- <form class="form-inline"> -->
+                <!-- <a href="<?php //print SITE_URL; ?>../controller/logout.php?q=logout" class="float-right btn btn-danger btn-sm">LOGOUT</a> -->
+                <!-- </form>          -->
+            </nav>
+        </div> 
+    </header>
+    <main>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12"></div>
+        </div>
+       
+            <form id="signup" class="form" action="{{ path('admin_signup') }}" method="POST" enctype="multipart/form-data">
+                <h1>Admin Registration</h1>
+                <p><span class="error">* required field</span></p>
+                <div class="form-field">
+                    <label for="fullname">Full Name:<span class="error">* </span></label>
+                    <input type="text" name="fullname" id="fullname" autocomplete="off" Required>
+                    <small></small>
+                </div>
+                <div class="form-field">
+                    <label for="uname">Username:<span class="error">* </span></label>
+                    <input type="text" name="uname" id="uname" autocomplete="off" Required>
+                    <small></small>
+                </div>
+                <div class="form-field">
+                    <label for="uemail">Email:<span class="error">* </span></label>
+                    <input type="text" name="uemail" id="uemail" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" autocomplete="off" Required>
+                    <small></small>
+                </div>
+                {# <div class="form-field">
+                    <label for="country">Country:<span class="error">* </span></label>
+                    <input type="text" name="country" id="country"  autocomplete="off" Required>
+                    <small></small>
+                </div>
+                <div class="form-field">
+                    <label for="state">State:<span class="error">* </span></label>
+                    <input type="text" name="state" id="state" autocomplete="off" Required>
+                    <small></small>
+                </div>
+                <div class="form-field">
+                    <label for="city">City:<span class="error">* </span></label>
+                    <input type="text" name="city" id="city"  autocomplete="off" Required>
+                    <small></small>
+                </div> #}
+                {# <div class="form-field">
+                    <label for="country">Select Country:<span class="error">* </span></label>
+                    <select id="country" name="country">
+                        <option value="" Required>Select Country</option>
+                        {# <?php 
+                        if($result->num_rows > 0){ 
+                            while($row = $result->fetch_assoc()){  
+                                echo '<option value="'.$row['iso2'].'">'.$row['name'].'</option>'; 
+                            }
+                        }else{ 
+                            echo '<option value="">Country not available</option>'; 
+                        } 
+                    
+                        ?> 
+                    </select>
+                    <small></small>
+                </div>      
+                <div class="form-field">
+                    <label for="state">Select State:<span class="error">* </span></label>
+                    <select id="state" name="state">
+                        <option value="" Required>Select State</option>
+                    </select>
+                    <small></small>
+                </div> 
+                <div class="form-field">
+                    <label for="state">Select City:<span class="error">* </span></label> 
+                    <select id="city" name="city">
+                        <option value="" Required>Select City</option>
+                    </select>
+                    <small></small>
+                </div>  #}
+                {# <br>
+                <div class="radio">
+                    <label for="gender">Gender:<span class="error">* </span> </label>
+                    <input type="radio" name="gender" id="male" value="Male" autocomplete="off" Required>Male
+                    <input type="radio" name="gender" id="female" value="Female" autocomplete="off" Required>Female
+                </div>
+                <div id="input-wrapper">
+                    Contact NO.<span class="error">* </span><br>
+                <label for="phone">+91</label>
+                <input type="text" id='phone' name="phone"  Required pattern="^(\+91[\-\s]?)?[0]?(91)?[6789]\d{9}$" oninput="if (typeof this.reportValidity === 'function') {this.reportValidity();}"/>
+                </div>
+                <br><br> #}
+                <div class="form-field">
+                    <label for="password">Password:<span class="error">* </span></label>
+                    <input type="password" name="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" autocomplete="off" Required>
+                    <small></small>
+                </div>
+                <div class="form-field">
+                    <label for="confirm-password">Confirm Password:<span class="error">* </span></label>
+                    <input type="password" name="confirm-password" id="confirm-password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" autocomplete="off" Required>
+                    <small></small>
+                </div>
+                {# <div class="form-field">
+                    <img src="../controller/captcha.php">
+                    <label for="captcha">Captcha:<span class="error">* </span></label>
+                    <input type="text" name="captcha" id="captcha" required placeholder='Enter Captcha'>
+                    
+                    <small></small>
+                </div>
+                
+                <label for="image">Image:</label>
+                <input type="file" id="image" name="image" Required>
+                  
+                <br>
+                <br> #}
+                <input type="checkbox" name="terms" id="terms" Required>
+                     Terms and Conditions!
+                <a href="../assets/image/book.jpg">link</a>
+                <br>
+                <?php //include 'captcha1.php'?>
+                <div class="footer1">
+                    <input type="submit" value="Register" name="submit" class="reg">
+                
+                    <button type="button" onclick="fun()" class="btn2">Reset</button>
+                </div>
+                <a href="{{ path('app_admin') }}">Already registered? Click Here!</a>
+        </form>
+    </div>
+    </main>
+    <div class="footer">
+        <p>&copy;2024 Rohit Kumar | Webkul All Rights Reserved</p>
+    </div> 
+    <script src="{{ asset('js/signup.js') }}"></script>
+{% endblock %}
